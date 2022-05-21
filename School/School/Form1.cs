@@ -141,26 +141,22 @@ namespace School
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            List<Estudiante> estudiantes = new List<Estudiante>();
+            List<Estudiante> estudiantes;
             string text = txtBuscar.Text;
             int n;
-            if (Int32.TryParse(text, out n))
-            {
-                Estudiante estudianteID = estudianteService.FindById(n);
-                if(estudianteID != null)
-                {
-                    estudiantes.Add(estudianteID);
-                }
-            }
-            Estudiante estudiante = estudianteService.FindByCarnet(text).FirstOrDefault();
-            if(estudiante != null)
-            {
-                estudiantes.Add(estudiante);
-            }
+            estudiantes = estudianteService.FindByCarnet(text);
             if (text.Length == 0)
             {
                 LoadDataGridView();
                 return;
+            }
+            if (Int32.TryParse(text, out n))
+            {
+                Estudiante estudianteID = estudianteService.FindById(n);
+                if (estudianteID != null)
+                {
+                    estudiantes.Add(estudianteID);
+                }
             }
             dgvEstudiantes.DataSource = estudiantes;
         }

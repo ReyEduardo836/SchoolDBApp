@@ -54,6 +54,7 @@ namespace School.AppCore.Services
 
         public Estudiante FindById(int id)
         {
+            if (id < 1) return null;
             try
             {
                 return estudianteRepository.FindById(id);

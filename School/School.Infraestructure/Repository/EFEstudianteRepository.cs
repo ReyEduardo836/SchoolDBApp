@@ -46,7 +46,7 @@ namespace School.Infraestructure.Repository
         {
             try
             {
-                return schoolContext.Estudiantes.Where(x => x.Carnet == carnet).ToList();
+                return schoolContext.Estudiantes.Where(x => x.Carnet.Contains(carnet)).ToList();
             }
             catch (Exception)
             {
