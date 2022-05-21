@@ -1,5 +1,6 @@
 ﻿using School.AppCore.IServices;
 using School.Domain.Entities;
+using School.Domain.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,11 @@ namespace School
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            string[] campos = { txtNombre.Text, txtApellido.Text, txtCarnet.Text, txtTelefono.Text, txtDireccion.Text, txtCorreo.Text, txtMatematica.Text, txtContabilidad.Text, txtProgramacion.Text, txtEstadistica.Text };
+            if (StringHelper.Wspaces(campos))
+            {
+                throw new Exception("No pueden haber campos vacios");
+            }
             List<Estudiante> est = estudianteService.FindByCarnet(txtCarnet.Text);
             Estudiante estudiante = new Estudiante()
             {
