@@ -33,8 +33,8 @@ namespace School
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
-            this.txtCarnet = new System.Windows.Forms.TextBox();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.txtCarnet = new System.Windows.Forms.MaskedTextBox();
+            this.txtTelefono = new System.Windows.Forms.MaskedTextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -93,6 +93,7 @@ namespace School
             // txtCarnet
             // 
             this.txtCarnet.Location = new System.Drawing.Point(138, 93);
+            this.txtCarnet.Mask = "0000-0000U";
             this.txtCarnet.Name = "txtCarnet";
             this.txtCarnet.Size = new System.Drawing.Size(100, 23);
             this.txtCarnet.TabIndex = 5;
@@ -100,6 +101,7 @@ namespace School
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(138, 122);
+            this.txtTelefono.Mask = "0000-0000";
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(100, 23);
             this.txtTelefono.TabIndex = 7;
@@ -386,8 +388,8 @@ namespace School
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtCarnet;
-        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.MaskedTextBox txtCarnet;
+        private System.Windows.Forms.MaskedTextBox txtTelefono;
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.TextBox txtMatematica;

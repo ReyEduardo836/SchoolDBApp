@@ -28,36 +28,29 @@ namespace School
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            string[] campos = { txtNombre.Text, txtApellido.Text, txtCarnet.Text, txtTelefono.Text, txtDireccion.Text, txtCorreo.Text, txtMatematica.Text, txtContabilidad.Text, txtProgramacion.Text, txtEstadistica.Text };
-            if (StringHelper.Wspaces(campos))
+            if (StringHelper.Wspaces(getAllCampos()))
             {
                 throw new Exception("No pueden haber campos vacios");
             }
-            List<Estudiante> est = estudianteService.FindByCarnet(txtCarnet.Text);
-            Estudiante estudiante = new Estudiante()
+            string valErrorString = StringHelper.ValidateEstudiantes(getAllCampos());
+            if (valErrorString.Length != 0)
             {
-                Nombres = txtNombre.Text,
-                Apellidos = txtApellido.Text,
-                Carnet = txtCarnet.Text,
-                Phone = txtTelefono.Text,
-                Direccion = txtDireccion.Text,
-                Correo = txtCorreo.Text,
-                Matematica = int.Parse(txtMatematica.Text),
-                Contabilidad = int.Parse(txtContabilidad.Text),
-                Programacion = int.Parse(txtProgramacion.Text),
-                Estadistica = int.Parse(txtEstadistica.Text)
-            };
+                throw new Exception(valErrorString);
+            }
+            List<Estudiante> est = estudianteService.FindByCarnet(txtCarnet.Text);
+            Estudiante estudiante = getNewEstudiante();
             if (est.Count != 0)
             {
                 estudianteService.Update(estudiante);
                 LoadDataGridView();
+                LimpiarCampos();
                 return;
             }
             else
             {
                 estudianteService.Create(estudiante);
                 LoadDataGridView();
-
+                LimpiarCampos();
             }
         }
 
@@ -99,6 +92,44 @@ namespace School
         private int getId()
         {
             return (int)dgvEstudiantes.CurrentRow.Cells[0].Value;
+        }
+
+        private Estudiante getNewEstudiante()
+        {
+            Estudiante estudiante = new Estudiante()
+            {
+                Nombres = txtNombre.Text,
+                Apellidos = txtApellido.Text,
+                Carnet = txtCarnet.Text,
+                Phone = txtTelefono.Text,
+                Direccion = txtDireccion.Text,
+                Correo = txtCorreo.Text,
+                Matematica = int.Parse(txtMatematica.Text),
+                Contabilidad = int.Parse(txtContabilidad.Text),
+                Programacion = int.Parse(txtProgramacion.Text),
+                Estadistica = int.Parse(txtEstadistica.Text)
+            };
+            return estudiante;
+        }
+
+        private void LimpiarCampos()
+        {
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            txtCarnet.Text = "";
+            txtTelefono.Text = "";
+            txtDireccion.Text = "";
+            txtCorreo.Text = "";
+            txtMatematica.Text = "";
+            txtContabilidad.Text = "";
+            txtProgramacion.Text = "";
+            txtEstadistica.Text = "";
+        }
+
+        private string[] getAllCampos()
+        {
+            string[] campos = { txtNombre.Text, txtApellido.Text, txtCarnet.Text, txtTelefono.Text, txtDireccion.Text, txtCorreo.Text, txtMatematica.Text, txtContabilidad.Text, txtProgramacion.Text, txtEstadistica.Text };
+            return campos;
         }
 
         private void mostrarPromedioToolStripMenuItem_Click(object sender, EventArgs e)
